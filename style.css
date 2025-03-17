@@ -1,0 +1,12 @@
+.line-container{
+    display: flex;
+}
+
+.col{
+    margin: 0 5px 0;
+}
+
+textarea{
+    height: 200px;
+    resize: none;
+}
