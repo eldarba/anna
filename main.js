@@ -6,16 +6,27 @@
     const btAddMechanism = document.getElementById("btAddMechanism");
     const newMechanismBox = document.getElementById("newMechanismBox");
     const removeMechanismBt = document.getElementById("removeMechanismBt");
+    const resetMechanismBt = document.getElementById("resetMechanismBt");
     const copeMechanismText = document.getElementById("copeMechanismText");
     const copeReplyText = document.getElementById("copeReplyText");
 
-    // constants
-    let coppingMechanisms = [
+    const coppingMechanismsDefault = [
         "-- Copping Mechanism --",
         "The Pleaser",
         "The Smoker",
         "The Protestor",
     ];
+
+    let coppingMechanisms = [];
+
+    if (localStorage.getItem("coppingMechanisms")) {
+        coppingMechanisms = JSON.parse(localStorage.getItem("coppingMechanisms"));
+    } else {
+        coppingMechanisms = coppingMechanisms.concat(coppingMechanismsDefault);
+    }
+
+
+
 
     window.addEventListener("load", loadMechanisms);
 
@@ -25,7 +36,6 @@
             const x = coppingMechanisms[i];
             html += `<option id="${i}">${x}</option>`;
         }
-        // what the fuck
         coppingMechanismsSelect.innerHTML = html;
     }
 
@@ -34,13 +44,21 @@
             alert("Enter Mechanism");
             return;
         }
+        console.log(coppingMechanisms.indexOf(newMechanismBox.value));
+        
+        if (coppingMechanisms.indexOf(newMechanismBox.value) !== -1) {
+            alert(`Mechanism ${newMechanismBox.value} Already Exists`);
+            return;
+        }
         coppingMechanisms.push(newMechanismBox.value);
+        localStorage.setItem("coppingMechanisms", JSON.stringify(coppingMechanisms));
         loadMechanisms();
         // clear text areas
         copeMechanismText.value = "";
         copeReplyText.value = "";
         newMechanismBox.value = "";
         coppingMechanismsSelect.selectedIndex = coppingMechanisms.length - 1;
+        enableInputs();
     });
 
     removeMechanismBt.addEventListener("click", function () {
@@ -54,8 +72,16 @@
             copeMechanismText.value = "";
             copeReplyText.value = "";
             coppingMechanisms = coppingMechanisms.filter(item => item !== coppingMechanismsSelect.value);
+            localStorage.setItem("coppingMechanisms", JSON.stringify(coppingMechanisms));
             // remove the option
             coppingMechanismsSelect.remove(selectedIndex);
+        }
+    });
+
+    resetMechanismBt.addEventListener("click", function () {
+        if (confirm("WARNING - All saved data will be deleted!")) {
+            localStorage.clear();
+            location.reload();
         }
     });
 
@@ -70,28 +96,26 @@
     // changing the cope mechanism select
     coppingMechanismsSelect.addEventListener("change", function () {
         if (this.selectedIndex > 0) {
-            copeMechanismText.disabled = false;
-            copeReplyText.disabled = false;
+            enableInputs();
             copeMechanismText.value = localStorage.getItem(this.value);
             copeReplyText.value = localStorage.getItem(this.value + "reply");
 
-            if(copeMechanismText.value && hebrewRegex.test(copeMechanismText.value[0])){
+            if (copeMechanismText.value && hebrewRegex.test(copeMechanismText.value[0])) {
                 copeMechanismText.dir = "rtl";
-            }else{
+            } else {
                 copeMechanismText.dir = "ltr";
             }
 
-            if(copeReplyText.value && hebrewRegex.test(copeReplyText.value[0])){
+            if (copeReplyText.value && hebrewRegex.test(copeReplyText.value[0])) {
                 copeReplyText.dir = "rtl";
-            }else{
+            } else {
                 copeReplyText.dir = "ltr";
             }
 
         } else {
             copeMechanismText.value = "";
             copeReplyText.value = "";
-            copeMechanismText.disabled = true;
-            copeReplyText.disabled = true;
+            disableInputs();
         }
     });
 
@@ -107,5 +131,15 @@
                 textarea.dir = 'ltr';
             }
         });
+    }
+
+    function enableInputs() {
+        copeMechanismText.disabled = false;
+        copeReplyText.disabled = false;
+    }
+    
+    function disableInputs() {
+        copeMechanismText.disabled = true;
+        copeReplyText.disabled = true;
     }
 }

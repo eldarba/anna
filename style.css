@@ -29,34 +29,39 @@ textarea {
     color: red;
 }
 
-#punitive-adult-div, #punitive-adult-div>textarea  {
+#punitive-adult-div,
+#punitive-adult-div>textarea {
     color: red;
 }
 
-#vulnerable-child-div, #vulnerable-child-div>textarea {
+#vulnerable-child-div,
+#vulnerable-child-div>textarea {
     color: blue;
 }
 
 #cope-mechanism-div textarea {
     color: darkred;
 }
+
 #copping-line>textarea {
     color: red;
 }
 
-.green, .green textarea, .green h3{
+.green,
+.green textarea,
+.green h3 {
     color: green;
 }
 
-.arrow{
+.arrow {
     font-size: xx-large;
 }
 
-#copping-line{
+#copping-line {
     margin-left: 219px;
 }
 
-select{
+select {
     font-size: large;
     color: darkred;
     font-weight: bold;
@@ -64,8 +69,6 @@ select{
     margin-bottom: 18px;
 }
 
-.hide{
+.hide {
     visibility: hidden;
 }
-
-
