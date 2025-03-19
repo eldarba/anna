@@ -2,7 +2,7 @@
 {
     // constant elements
     /**@type {HTMLSelectElement} */
-    const coppingMechanismsSelect = document.getElementById("coppingMechanismsSelect");
+    const copingMechanismsSelect = document.getElementById("copingMechanismsSelect");
     const btAddMechanism = document.getElementById("btAddMechanism");
     const newMechanismBox = document.getElementById("newMechanismBox");
     const removeMechanismBt = document.getElementById("removeMechanismBt");
@@ -10,19 +10,19 @@
     const copeMechanismText = document.getElementById("copeMechanismText");
     const copeReplyText = document.getElementById("copeReplyText");
 
-    const coppingMechanismsDefault = [
-        "-- Copping Mechanism --",
+    const copingMechanismsDefault = [
+        "-- coping Mechanism --",
         "The Pleaser",
         "The Smoker",
         "The Protestor",
     ];
 
-    let coppingMechanisms = [];
+    let copingMechanisms = [];
 
-    if (localStorage.getItem("coppingMechanisms")) {
-        coppingMechanisms = JSON.parse(localStorage.getItem("coppingMechanisms"));
+    if (localStorage.getItem("copingMechanisms")) {
+        copingMechanisms = JSON.parse(localStorage.getItem("copingMechanisms"));
     } else {
-        coppingMechanisms = coppingMechanisms.concat(coppingMechanismsDefault);
+        copingMechanisms = copingMechanisms.concat(copingMechanismsDefault);
     }
 
 
@@ -32,11 +32,11 @@
 
     function loadMechanisms() {
         let html = "";
-        for (let i = 0; i < coppingMechanisms.length; i++) {
-            const x = coppingMechanisms[i];
+        for (let i = 0; i < copingMechanisms.length; i++) {
+            const x = copingMechanisms[i];
             html += `<option id="${i}">${x}</option>`;
         }
-        coppingMechanismsSelect.innerHTML = html;
+        copingMechanismsSelect.innerHTML = html;
     }
 
     btAddMechanism.addEventListener("click", function () {
@@ -44,37 +44,37 @@
             alert("Enter Mechanism");
             return;
         }
-        console.log(coppingMechanisms.indexOf(newMechanismBox.value));
+        console.log(copingMechanisms.indexOf(newMechanismBox.value));
         
-        if (coppingMechanisms.indexOf(newMechanismBox.value) !== -1) {
+        if (copingMechanisms.indexOf(newMechanismBox.value) !== -1) {
             alert(`Mechanism ${newMechanismBox.value} Already Exists`);
             return;
         }
-        coppingMechanisms.push(newMechanismBox.value);
-        localStorage.setItem("coppingMechanisms", JSON.stringify(coppingMechanisms));
+        copingMechanisms.push(newMechanismBox.value);
+        localStorage.setItem("copingMechanisms", JSON.stringify(copingMechanisms));
         loadMechanisms();
         // clear text areas
         copeMechanismText.value = "";
         copeReplyText.value = "";
         newMechanismBox.value = "";
-        coppingMechanismsSelect.selectedIndex = coppingMechanisms.length - 1;
+        copingMechanismsSelect.selectedIndex = copingMechanisms.length - 1;
         enableInputs();
     });
 
     removeMechanismBt.addEventListener("click", function () {
-        const selectedIndex = coppingMechanismsSelect.selectedIndex;
+        const selectedIndex = copingMechanismsSelect.selectedIndex;
         if (selectedIndex > 0) {
-            alert(`Remove ${coppingMechanismsSelect.value} copping mechanism?`);
+            alert(`Remove ${copingMechanismsSelect.value} coping mechanism?`);
             // clear cache
-            localStorage.removeItem(coppingMechanismsSelect.value);
-            localStorage.removeItem(coppingMechanismsSelect.value + "reply");
+            localStorage.removeItem(copingMechanismsSelect.value);
+            localStorage.removeItem(copingMechanismsSelect.value + "reply");
             // clear text areas
             copeMechanismText.value = "";
             copeReplyText.value = "";
-            coppingMechanisms = coppingMechanisms.filter(item => item !== coppingMechanismsSelect.value);
-            localStorage.setItem("coppingMechanisms", JSON.stringify(coppingMechanisms));
+            copingMechanisms = copingMechanisms.filter(item => item !== copingMechanismsSelect.value);
+            localStorage.setItem("copingMechanisms", JSON.stringify(copingMechanisms));
             // remove the option
-            coppingMechanismsSelect.remove(selectedIndex);
+            copingMechanismsSelect.remove(selectedIndex);
         }
     });
 
@@ -86,15 +86,15 @@
     });
 
     copeMechanismText.addEventListener("input", function () {
-        localStorage.setItem(coppingMechanismsSelect.value, this.value);
+        localStorage.setItem(copingMechanismsSelect.value, this.value);
     });
 
     copeReplyText.addEventListener("input", function () {
-        localStorage.setItem(coppingMechanismsSelect.value + "reply", this.value);
+        localStorage.setItem(copingMechanismsSelect.value + "reply", this.value);
     });
 
     // changing the cope mechanism select
-    coppingMechanismsSelect.addEventListener("change", function () {
+    copingMechanismsSelect.addEventListener("change", function () {
         if (this.selectedIndex > 0) {
             enableInputs();
             copeMechanismText.value = localStorage.getItem(this.value);
