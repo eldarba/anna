@@ -53,7 +53,7 @@ textarea {
     color: darkred;
 }
 
-.green textarea, .green h3{
+.green, .green textarea, .green h3{
     color: green;
 }
 
