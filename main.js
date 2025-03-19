@@ -8,7 +8,7 @@
 
     // constants
     const coppingMechanisms = [
-        "-- Choose Copping Mechanism --",
+        "-- Copping Mechanism --",
         "The Pleaser",
         "The Smoker",
         "The Protestor",

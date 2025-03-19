@@ -28,6 +28,7 @@ input {
 textarea {
     height: 200px;
     resize: none;
+    border: 3px solid;
 }
 
 #removeMechanismBt {
@@ -35,19 +36,22 @@ textarea {
     color: red;
 }
 
-#punitive-adult-div {
+#punitive-adult-div, #punitive-adult-div>textarea  {
     color: red;
 }
 
-#vulnerable-child-div {
+#vulnerable-child-div, #vulnerable-child-div>textarea {
     color: blue;
 }
 
 #copping-mechanism-div {
     color: darkred;
 }
+#copping-line>textarea {
+    color: darkred;
+}
 
-.green{
+.green textarea, .green h3{
     color: green;
 }
 
@@ -57,4 +61,10 @@ textarea {
 
 #copping-line{
     margin-left: 207px;
+}
+
+select{
+    font-size: large;
+    color: darkred;
+    font-weight: bold;
 }
