@@ -69,3 +69,7 @@ select{
     color: darkred;
     font-weight: bold;
 }
+
+.hide{
+    visibility: hidden;
+}
