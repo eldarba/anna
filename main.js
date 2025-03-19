@@ -22,6 +22,7 @@
             const x = coppingMechanisms[i];
             html += `<option id="${i}">${x}</option>`;
         }
+        // what the fuck
         coppingMechanismsSelect.innerHTML = html;
     }
 
