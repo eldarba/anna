@@ -22,13 +22,13 @@
                 <div class="arrow"><i class="fas fa-arrow-down"></i></div>
             </div>
             <div class="arrow hide"><i class="fas fa-arrow-right"></i></div>
-            
+
             <div id="healty-adult-punitive-div" class="col">
                 <textarea name="" id=""></textarea>
                 <div class="arrow green"><i class="fas fa-arrow-down"></i></div>
             </div>
             <div class="arrow hide"><i class="fas fa-arrow-right"></i></div>
-            
+
             <div id="healty-adult-vulnerable-div" class="col">
                 <textarea name="" id=""></textarea>
                 <div class="arrow"><i class="fas fa-arrow-down"></i></div>
@@ -41,56 +41,55 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Situation to Copping -->
     <div class="line-container">
-        
+
         <div id="situation-div" class="col">
             <h3>Situation</h3>
             <textarea name="" id=""></textarea>
         </div>
         <div class="arrow"><i class="fas fa-arrow-right"></i></div>
-        
+
         <div id="punitive-adult-div" class="col">
             <h3>Punitive Adult</h3>
             <textarea name="" id=""></textarea>
         </div>
         <div class="arrow"><i class="fas fa-arrow-right"></i></div>
-        
+
         <div id="vulnerable-child-div" class="col">
             <h3>Vulnerable Child</h3>
             <textarea name="" id=""></textarea>
         </div>
         <div class="arrow"><i class="fas fa-arrow-right"></i></div>
-        
-        <div id="copping-mechanism-div" class="col">
-            <!-- <h3>Copping Mechanism</h3> -->
+
+        <div id="cope-mechanism-div" class="col">
             <select id="coppingMechanismsSelect"></select>
-            <br>
-            <br>
-            <fieldset>
-                <legend>Add / Remove Mechanisms</legend>
-                <input id="newMechanismBox" type="text" placeholder="Enter New Mechanism...">
-                <button id="btAddMechanism">Add</button>
-                <br>
-                <br>
-                <button id="removeMechanismBt">Remove Selected Mechanism</button>
-            </fieldset>
+            <textarea name="" id="copeMechanismText" disabled></textarea>
         </div>
-        
+
     </div>
-    
+
     <!-- Copping Mechanism Reply -->
     <div id="copping-line" class="line-container">
-       
-        <textarea name="" id=""></textarea>
+
+        <textarea name="" id="copeReplyText" disabled></textarea>
         <div id="down-arrow-div">
             <img src="assets/images/downArrow-removebg-preview.png" alt="">
         </div>
-        
+
     </div>
-    
-    
+
+    <fieldset>
+        <legend>Add / Remove Copping Mechanisms</legend>
+        <input id="newMechanismBox" type="text" placeholder="Enter New Mechanism...">
+        <button id="btAddMechanism">Add</button>
+        <br>
+        <br>
+        <button id="removeMechanismBt">Remove Selected Mechanism</button>
+    </fieldset>
+
+
     <script src="main.js"></script>
 </body>
 

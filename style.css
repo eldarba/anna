@@ -3,20 +3,11 @@ body {
     font-family: sans-serif;
 }
 
-textarea,
-select,
-input {
-    font-family: sans-serif;
-    /* background-color: black; */
-    /* color: lightblue; */
-    margin-bottom: 10px;
-}
-
-/*  */
-
 .line-container {
     display: flex;
     align-items: center;
+    align-items: center;
+    /* border: 1px solid; */
 }
 
 .col {
@@ -46,11 +37,11 @@ textarea {
     color: blue;
 }
 
-#copping-mechanism-div {
+#cope-mechanism-div textarea {
     color: darkred;
 }
 #copping-line>textarea {
-    color: darkred;
+    color: red;
 }
 
 .green, .green textarea, .green h3{
@@ -62,15 +53,19 @@ textarea {
 }
 
 #copping-line{
-    margin-left: 207px;
+    margin-left: 219px;
 }
 
 select{
     font-size: large;
     color: darkred;
     font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 18px;
 }
 
 .hide{
     visibility: hidden;
 }
+
+
