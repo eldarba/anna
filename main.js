@@ -1,145 +1,79 @@
-"use strict";
-{
-    // constant elements
-    /**@type {HTMLSelectElement} */
-    const copingMechanismsSelect = document.getElementById("copingMechanismsSelect");
-    const btAddMechanism = document.getElementById("btAddMechanism");
-    const newMechanismBox = document.getElementById("newMechanismBox");
-    const removeMechanismBt = document.getElementById("removeMechanismBt");
-    const resetMechanismBt = document.getElementById("resetMechanismBt");
-    const copeMechanismText = document.getElementById("copeMechanismText");
-    const copeReplyText = document.getElementById("copeReplyText");
+import * as elements from "./elements.js";
+import * as data from "./data.js";
+import * as view from "./view.js";
 
-    const copingMechanismsDefault = [
-        "-- coping Mechanism --",
-        "The Pleaser",
-        "The Smoker",
-        "The Protestor",
-    ];
+// init actions:
+data.loadCopingMechanismsFromStorage();
+window.addEventListener("load", view.loadCopingMechanismsToDom);
+view.normalizeTextAreas();
 
-    let copingMechanisms = [];
+if (localStorage.getItem("situations")) {
+    data.setSituations(JSON.parse(localStorage.getItem("situations")));
+    view.displaySituationsOnTable();
+}
 
-    if (localStorage.getItem("copingMechanisms")) {
-        copingMechanisms = JSON.parse(localStorage.getItem("copingMechanisms"));
+elements.btAddMechanism.addEventListener("click", function () {
+    const value = elements.newMechanismBox.value;
+    if (value === "") {
+        alert("Enter Mechanism");
+        return;
+    }
+
+    if (data.copingMechanismsArray.indexOf(value) !== -1) {
+        alert(`Mechanism ${value} Already Exists`);
+        return;
+    }
+
+    // handle data add
+    data.addCopingMechanism()
+    // handle view
+    view.addCopingMechanism()
+});
+
+elements.btRemoveMechanism.addEventListener("click", function () {
+    const copeMechanismSelectIndex = elements.copingMechanismsSelect.selectedIndex;
+    if (copeMechanismSelectIndex > 0) {
+        const mechanism = elements.copingMechanismsSelect.value;
+        alert(`Remove ${mechanism} coping mechanism?`);
+        // handle data remove
+        data.removeCopingMechanism(mechanism);
+        //handle view
+        view.removeCopingMechanism(copeMechanismSelectIndex);
     } else {
-        copingMechanisms = copingMechanisms.concat(copingMechanismsDefault);
+        alert("Select Coping Mechanism to Remove!");
     }
+});
 
-
-
-
-    window.addEventListener("load", loadMechanisms);
-
-    function loadMechanisms() {
-        let html = "";
-        for (let i = 0; i < copingMechanisms.length; i++) {
-            const x = copingMechanisms[i];
-            html += `<option id="${i}">${x}</option>`;
-        }
-        copingMechanismsSelect.innerHTML = html;
+elements.btResetMechanism.addEventListener("click", function () {
+    if (confirm("WARNING - All saved data will be deleted!")) {
+        localStorage.removeItem("copingMechanisms");
+        data.setCopingMechanismsArray([]);
+        data.loadCopingMechanismsFromStorage();
+        view.loadCopingMechanismsToDom();
+        // location.reload();
     }
+});
 
-    btAddMechanism.addEventListener("click", function () {
-        if (newMechanismBox.value === "") {
-            alert("Enter Mechanism");
-            return;
-        }
-        console.log(copingMechanisms.indexOf(newMechanismBox.value));
-        
-        if (copingMechanisms.indexOf(newMechanismBox.value) !== -1) {
-            alert(`Mechanism ${newMechanismBox.value} Already Exists`);
-            return;
-        }
-        copingMechanisms.push(newMechanismBox.value);
-        localStorage.setItem("copingMechanisms", JSON.stringify(copingMechanisms));
-        loadMechanisms();
-        // clear text areas
+copeMechanismText.addEventListener("input", function () {
+    localStorage.setItem(copingMechanismsSelect.value, this.value);
+});
+
+copeReplyText.addEventListener("input", function () {
+    localStorage.setItem(copingMechanismsSelect.value + "reply", this.value);
+});
+
+// changing the cope mechanism select
+copingMechanismsSelect.addEventListener("change", function () {
+    if (this.selectedIndex > 0) {
+        view.enableInputs();
+        copeMechanismText.value = localStorage.getItem(this.value);
+        copeReplyText.value = localStorage.getItem(this.value + "reply");
+    } else {
         copeMechanismText.value = "";
         copeReplyText.value = "";
-        newMechanismBox.value = "";
-        copingMechanismsSelect.selectedIndex = copingMechanisms.length - 1;
-        enableInputs();
-    });
-
-    removeMechanismBt.addEventListener("click", function () {
-        const selectedIndex = copingMechanismsSelect.selectedIndex;
-        if (selectedIndex > 0) {
-            alert(`Remove ${copingMechanismsSelect.value} coping mechanism?`);
-            // clear cache
-            localStorage.removeItem(copingMechanismsSelect.value);
-            localStorage.removeItem(copingMechanismsSelect.value + "reply");
-            // clear text areas
-            copeMechanismText.value = "";
-            copeReplyText.value = "";
-            copingMechanisms = copingMechanisms.filter(item => item !== copingMechanismsSelect.value);
-            localStorage.setItem("copingMechanisms", JSON.stringify(copingMechanisms));
-            // remove the option
-            copingMechanismsSelect.remove(selectedIndex);
-        }
-    });
-
-    resetMechanismBt.addEventListener("click", function () {
-        if (confirm("WARNING - All saved data will be deleted!")) {
-            localStorage.clear();
-            location.reload();
-        }
-    });
-
-    copeMechanismText.addEventListener("input", function () {
-        localStorage.setItem(copingMechanismsSelect.value, this.value);
-    });
-
-    copeReplyText.addEventListener("input", function () {
-        localStorage.setItem(copingMechanismsSelect.value + "reply", this.value);
-    });
-
-    // changing the cope mechanism select
-    copingMechanismsSelect.addEventListener("change", function () {
-        if (this.selectedIndex > 0) {
-            enableInputs();
-            copeMechanismText.value = localStorage.getItem(this.value);
-            copeReplyText.value = localStorage.getItem(this.value + "reply");
-
-            if (copeMechanismText.value && hebrewRegex.test(copeMechanismText.value[0])) {
-                copeMechanismText.dir = "rtl";
-            } else {
-                copeMechanismText.dir = "ltr";
-            }
-
-            if (copeReplyText.value && hebrewRegex.test(copeReplyText.value[0])) {
-                copeReplyText.dir = "rtl";
-            } else {
-                copeReplyText.dir = "ltr";
-            }
-
-        } else {
-            copeMechanismText.value = "";
-            copeReplyText.value = "";
-            disableInputs();
-        }
-    });
-
-    // Hebrew Unicode range: \u0590 - \u05FF
-    const hebrewRegex = /^[\u0590-\u05FF]/;
-
-    for (const textarea of document.getElementsByTagName("textarea")) {
-        textarea.addEventListener("input", function () {
-            const value = textarea.value.trim();
-            if (value && hebrewRegex.test(value[0])) {
-                textarea.dir = 'rtl';
-            } else {
-                textarea.dir = 'ltr';
-            }
-        });
+        view.disableInputs();
     }
+});
 
-    function enableInputs() {
-        copeMechanismText.disabled = false;
-        copeReplyText.disabled = false;
-    }
-    
-    function disableInputs() {
-        copeMechanismText.disabled = true;
-        copeReplyText.disabled = true;
-    }
-}
+elements.btSaveSituation.addEventListener("click", data.saveSituation);
+

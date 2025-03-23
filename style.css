@@ -1,7 +1,17 @@
-body {
+body, html {
     background-color: palegoldenrod;
     font-family: sans-serif;
+    margin: 0;
 }
+
+div.container{
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    height: 100vh;
+}
+/* div.aside, div.main{
+    border: 1px solid;
+} */
 
 .line-container {
     display: flex;
@@ -24,7 +34,7 @@ textarea {
     border-radius: 9px;
 }
 
-#removeMechanismBt {
+#btRemoveMechanism {
     /* background-color: blue; */
     color: red;
 }
@@ -71,4 +81,11 @@ select {
 
 .hide {
     visibility: hidden;
+}
+
+/* aside */
+table,th, td{
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 3px;
 }
