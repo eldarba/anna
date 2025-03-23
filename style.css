@@ -6,8 +6,9 @@ body, html {
 
 div.container{
     display: grid;
-    grid-template-columns: 8fr 2fr;
+    grid-template-columns: 6fr 4fr;
     height: 100vh;
+    margin: 5px;
 }
 /* div.aside, div.main{
     border: 1px solid;
@@ -88,4 +89,13 @@ table,th, td{
     border: 1px solid;
     border-collapse: collapse;
     padding: 3px;
+}
+
+#div-save{
+    padding: 10px;
+}
+
+#div-save>button{
+    color: green;
+    font-weight: bold;
 }
