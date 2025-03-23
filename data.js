@@ -93,6 +93,16 @@ export function saveSituation() {
         copingMechanisms.push(new CopingMechanism(item, localStorage.getItem(item), localStorage.getItem(item + "reply")));
     }
     const situationTitle = prompt("Enter Situation Title");
+    console.log(situationTitle);
+    
+    if(situationTitle === ""){
+        alert("You must enter a title!");
+        return;
+    }
+    
+    if(!situationTitle){
+        return;
+    }
     situation = new Situation(situationTitle, healthyAdult, elements.txtSituation.value, elements.txtPunitive.value, elements.txtVulnerable.value, copingMechanisms);
     situations.push(situation);
     localStorage.setItem("situations", JSON.stringify(situations));
