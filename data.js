@@ -103,7 +103,8 @@ export function saveSituation() {
     loadCopingMechanismsFromStorage();
     view.loadCopingMechanismsToDom();
 
-    elements.copeMechanismText.value = "";
-    elements.copeReplyText.value = "";
+    // elements.copeMechanismText.value = "";
+    // elements.copeReplyText.value = "";
+    view.clearAllTextAreas();
     view.disableInputs();
 }

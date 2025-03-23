@@ -161,3 +161,9 @@ export function deleteSituation(sit) {
 
 }
 
+export function clearAllTextAreas(){
+    for(const ta of document.getElementsByTagName("textarea")){
+        ta.value = "";
+    }
+}
+
