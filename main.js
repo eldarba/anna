@@ -45,7 +45,7 @@ elements.btRemoveMechanism.addEventListener("click", function () {
 });
 
 elements.btResetMechanism.addEventListener("click", function () {
-    if (confirm("WARNING - All saved data will be deleted!")) {
+    if (confirm("WARNING - Mechanisms will be deleted!")) {
         localStorage.removeItem("copingMechanisms");
         data.setCopingMechanismsArray([]);
         data.loadCopingMechanismsFromStorage();
@@ -69,8 +69,8 @@ copingMechanismsSelect.addEventListener("change", function () {
         copeMechanismText.value = localStorage.getItem(this.value);
         copeReplyText.value = localStorage.getItem(this.value + "reply");
     } else {
-        copeMechanismText.value = "";
-        copeReplyText.value = "";
+        elements.copeMechanismText.value = "";
+        elements.copeReplyText.value = "";
         view.disableInputs();
     }
 });

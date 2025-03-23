@@ -95,8 +95,6 @@ export function displaySituationsOnTable() {
 }
 
 export function showSituationDetails(situation) {
-    console.log("Show");
-
     txtHealthySituation.value = situation.healthyAdult.situation;
     txtHealthyPunitive.value = situation.healthyAdult.punitiveAdult;
     txtHealthyVulnerable.value = situation.healthyAdult.vulnerableChild;

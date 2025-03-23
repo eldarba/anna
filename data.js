@@ -27,7 +27,7 @@ export class Situation {
         this.copingMechanisms = copingMechanisms;
     }
 
-    getDateFormatted(){
+    getDateFormatted() {
         // return this.date.toLocaleDateString() + ":" + this.date.toLocaleTimeString();
         return this.date;
     }
@@ -80,23 +80,32 @@ export function removeCopingMechanism(mechanism) {
 export let situation = null;
 export let situations = [];
 
-export function setSituations(sit){
+export function setSituations(sit) {
     situations = sit;
 }
 
 export function saveSituation() {
-    if(elements.txtSituation.value === ""){
+    if (elements.txtSituation.value === "") {
         alert("Enter Situation");
         return;
     }
     const healthyAdult = new HealthyAdult(elements.txtHealthySituation.value, elements.txtHealthyPunitive.value, elements.txtHealthyVulnerable.value, elements.txtCoping.value);
     const copingMechanisms = [];
     for (const item of copingMechanismsArray) {
-        copingMechanisms.push(new CopingMechanism(item, localStorage.getItem(item), localStorage.getItem(item+"reply")));
+        copingMechanisms.push(new CopingMechanism(item, localStorage.getItem(item), localStorage.getItem(item + "reply")));
     }
     const situationTitle = prompt("Enter Situation Title");
     situation = new Situation(situationTitle, healthyAdult, elements.txtSituation.value, elements.txtPunitive.value, elements.txtVulnerable.value, copingMechanisms);
     situations.push(situation);
     localStorage.setItem("situations", JSON.stringify(situations));
     view.displaySituationsOnTable();
+
+    localStorage.removeItem("copingMechanisms");
+    setCopingMechanismsArray([]);
+    loadCopingMechanismsFromStorage();
+    view.loadCopingMechanismsToDom();
+
+    elements.copeMechanismText.value = "";
+    elements.copeReplyText.value = "";
+    view.disableInputs();
 }
