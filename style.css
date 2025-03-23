@@ -1,17 +1,19 @@
-body, html {
+body,
+html {
     background-color: palegoldenrod;
     font-family: sans-serif;
     margin: 0;
 }
 
-div.container{
+div.container {
     display: grid;
     grid-template-columns: 6fr 4fr;
     height: 100vh;
     padding: 15px;
     box-sizing: border-box;
 }
-div.main fieldset{
+
+div.main fieldset {
     width: fit-content;
 }
 
@@ -87,27 +89,30 @@ select {
 
 /* aside */
 
-.aside{
+.aside {
     background-color: lightblue;
     border-radius: 8px;
     padding: 10px;
 }
 
-table{
+table {
     width: 100%;
 }
-table,th, td{
+
+table,
+th,
+td {
     border: 1px solid;
     border-collapse: collapse;
     padding: 3px;
     text-align: center;
 }
 
-#div-save{
+#div-save {
     padding: 10px;
 }
 
-#div-save>button{
+#div-save>button {
     color: green;
     font-weight: bold;
 }

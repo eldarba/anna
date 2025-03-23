@@ -5,7 +5,7 @@ import * as view from "./view.js";
 // init actions:
 data.loadCopingMechanismsFromStorage();
 window.addEventListener("load", view.loadCopingMechanismsToDom);
-view.normalizeTextAreas();
+view.normalizeTextAreasListener();
 
 if (localStorage.getItem("situations")) {
     data.setSituations(JSON.parse(localStorage.getItem("situations")));

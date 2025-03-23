@@ -64,8 +64,6 @@ export function addCopingMechanism() {
     localStorage.setItem("copingMechanisms", JSON.stringify(copingMechanismsArray));
 }
 
-
-
 export function removeCopingMechanism(mechanism) {
     // remove data for coping mechanism text areas
     localStorage.removeItem(mechanism);

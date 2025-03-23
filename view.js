@@ -10,8 +10,6 @@ export function loadCopingMechanismsToDom() {
     elements.copingMechanismsSelect.innerHTML = html;
 }
 
-
-
 export function enableInputs() {
     copeMechanismText.disabled = false;
     copeReplyText.disabled = false;
@@ -22,11 +20,10 @@ export function disableInputs() {
     copeReplyText.disabled = true;
 }
 
-
 // Hebrew Unicode range: \u0590 - \u05FF
 const hebrewRegex = /^[\u0590-\u05FF]/;
 
-export function normalizeTextAreas() {
+export function normalizeTextAreasListener() {
 
     for (const textarea of document.getElementsByTagName("textarea")) {
         textarea.addEventListener("input", function () {
@@ -37,6 +34,18 @@ export function normalizeTextAreas() {
                 textarea.dir = 'ltr';
             }
         });
+    }
+}
+
+export function normalizeTextAreas() {
+
+    for (const textarea of document.getElementsByTagName("textarea")) {
+        const value = textarea.value.trim();
+        if (value && hebrewRegex.test(value[0])) {
+            textarea.dir = 'rtl';
+        } else {
+            textarea.dir = 'ltr';
+        }
     }
 }
 
@@ -123,15 +132,16 @@ export function showSituationDetails(situation) {
     const options = elements.copingMechanismsSelect.options;
 
     for (let i = 0; i < options.length; i++) {
-      if (options[i].text !== "-- coping Mechanism --" && options[i].text) {
-        elements.copingMechanismsSelect.selectedIndex = i;
-        // Trigger the change event
-        const event = new Event('change', { bubbles: true });
-        elements.copingMechanismsSelect.dispatchEvent(event);
-        break;
-      }
+        if (options[i].text !== "-- coping Mechanism --" && options[i].text) {
+            elements.copingMechanismsSelect.selectedIndex = i;
+            // Trigger the change event
+            const event = new Event('change', { bubbles: true });
+            elements.copingMechanismsSelect.dispatchEvent(event);
+            break;
+        }
     }
 
+    normalizeTextAreas();
 
 }
 
