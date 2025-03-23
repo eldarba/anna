@@ -8,11 +8,12 @@ div.container{
     display: grid;
     grid-template-columns: 6fr 4fr;
     height: 100vh;
-    margin: 5px;
+    padding: 15px;
+    box-sizing: border-box;
 }
-/* div.aside, div.main{
-    border: 1px solid;
-} */
+div.main fieldset{
+    width: fit-content;
+}
 
 .line-container {
     display: flex;
@@ -85,10 +86,21 @@ select {
 }
 
 /* aside */
+
+.aside{
+    background-color: lightblue;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+table{
+    width: 100%;
+}
 table,th, td{
     border: 1px solid;
     border-collapse: collapse;
     padding: 3px;
+    text-align: center;
 }
 
 #div-save{
