@@ -1,9 +1,9 @@
-/**@type {HTMLSelectElement} */
 export const btAddMechanism = document.getElementById("btAddMechanism");
 export const btRemoveMechanism = document.getElementById("btRemoveMechanism");
 export const btResetMechanism = document.getElementById("btResetMechanism");
 export const btSaveSituation = document.getElementById("btSaveSituation");
 
+/**@type {HTMLSelectElement} */
 export const copingMechanismsSelect = document.getElementById("copingMechanismsSelect");
 export const newMechanismBox = document.getElementById("newMechanismBox");
 export const copeMechanismText = document.getElementById("copeMechanismText");

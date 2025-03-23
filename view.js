@@ -66,7 +66,7 @@ export function displaySituationsOnTable() {
         tr.setAttribute("id", sit.date);
 
         const tdSituation = document.createElement("td");
-        tdSituation.innerHTML = sit.situation;
+        tdSituation.innerHTML = sit.title;
 
         const tdDate = document.createElement("td");
         tdDate.innerHTML = sit.date;
@@ -101,20 +101,19 @@ export function showSituationDetails(situation) {
     txtHealthyPunitive.value = situation.healthyAdult.punitiveAdult;
     txtHealthyVulnerable.value = situation.healthyAdult.vulnerableChild;
     txtCoping.value = situation.healthyAdult.copingMechanism;
-    
+
     txtSituation.value = situation.situation;
     txtPunitive.value = situation.punitiveAdult;
     txtVulnerable.value = situation.vulnerableChild;
 
     // mechanisms
     const names = [];
-    for(const mechanism of situation.copingMechanisms){
+    for (const mechanism of situation.copingMechanisms) {
         names.push(mechanism.name);
         localStorage.setItem(mechanism.name, mechanism.description);
         localStorage.setItem(mechanism.name + "reply", mechanism.reply);
     }
-    console.log(names);
-    
+
     localStorage.setItem("copingMechanisms", JSON.stringify(names));
     data.setCopingMechanismsArray(names);
     data.loadCopingMechanismsFromStorage();
@@ -123,18 +122,31 @@ export function showSituationDetails(situation) {
     elements.copeMechanismText.value = "";
     elements.copeReplyText.value = "";
 
-   
+    const options = elements.copingMechanismsSelect.options;
 
-    
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].text !== "-- coping Mechanism --" && options[i].text) {
+        elements.copingMechanismsSelect.selectedIndex = i;
+        // Trigger the change event
+        const event = new Event('change', { bubbles: true });
+        elements.copingMechanismsSelect.dispatchEvent(event);
+        break;
+      }
+    }
+
+
 }
 
 export function deleteSituation(sit) {
+    if (!confirm("Delete Situation?")) {
+        return;
+    }
     // data.setSituations(data.situations.filter(s => s.date.getTime() !== sit.date.getTime()));
     data.setSituations(data.situations.filter(s => s.date !== sit.date));
     localStorage.setItem("situations", JSON.stringify(data.situations));
     displaySituationsOnTable();
 
-    for(const mechanism of sit.copingMechanisms){
+    for (const mechanism of sit.copingMechanisms) {
         localStorage.removeItem(mechanism.name);
         localStorage.removeItem(mechanism.name + "reply");
     }

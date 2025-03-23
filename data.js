@@ -16,9 +16,10 @@ export function setCopingMechanismsArray(arr) {
 
 export class Situation {
 
-    constructor(HealthyAdult, situation, punitiveAdult, vulnerableChild, copingMechanisms) {
+    constructor(title, HealthyAdult, situation, punitiveAdult, vulnerableChild, copingMechanisms) {
         const d = new Date();
         this.date = d.toLocaleDateString() + ":" + d.toLocaleTimeString();
+        this.title = title;
         this.healthyAdult = HealthyAdult;
         this.situation = situation;
         this.punitiveAdult = punitiveAdult;
@@ -93,7 +94,8 @@ export function saveSituation() {
     for (const item of copingMechanismsArray) {
         copingMechanisms.push(new CopingMechanism(item, localStorage.getItem(item), localStorage.getItem(item+"reply")));
     }
-    situation = new Situation(healthyAdult, elements.txtSituation.value, elements.txtPunitive.value, elements.txtVulnerable.value, copingMechanisms);
+    const situationTitle = prompt("Enter Situation Title");
+    situation = new Situation(situationTitle, healthyAdult, elements.txtSituation.value, elements.txtPunitive.value, elements.txtVulnerable.value, copingMechanisms);
     situations.push(situation);
     localStorage.setItem("situations", JSON.stringify(situations));
     view.displaySituationsOnTable();
