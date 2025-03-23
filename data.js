@@ -3,9 +3,9 @@ import * as view from "./view.js";
 
 export const copingMechanismsDefault = [
     "-- coping Mechanism --",
-    "The Pleaser",
-    "The Smoker",
-    "The Protestor",
+    // "The Pleaser",
+    // "The Smoker",
+    // "The Protestor",
 ];
 
 export let copingMechanismsArray = [];
