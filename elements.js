@@ -1,3 +1,5 @@
+console.log("loading elements");
+
 export const btAddMechanism = document.getElementById("btAddMechanism");
 export const btRemoveMechanism = document.getElementById("btRemoveMechanism");
 export const btResetMechanism = document.getElementById("btResetMechanism");

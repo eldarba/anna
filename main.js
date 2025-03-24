@@ -2,9 +2,13 @@ import * as elements from "./elements.js";
 import * as data from "./data.js";
 import * as view from "./view.js";
 
+console.log("loading main");
+
+
 // init actions:
-data.loadCopingMechanismsFromStorage();
-window.addEventListener("load", view.loadCopingMechanismsToDom);
+view.resetPage();
+// data.loadCopingMechanismsFromStorage();
+// window.addEventListener("load", view.loadCopingMechanismsToDom);
 view.normalizeTextAreasListener();
 
 if (localStorage.getItem("situations")) {

@@ -1,6 +1,8 @@
 import * as data from "./data.js";
 import * as elements from "./elements.js";
 
+console.log("loading view");
+
 export function loadCopingMechanismsToDom() {
     let html = "";
     for (let i = 0; i < data.copingMechanismsArray.length; i++) {
@@ -165,5 +167,14 @@ export function clearAllTextAreas(){
     for(const ta of document.getElementsByTagName("textarea")){
         ta.value = "";
     }
+}
+
+export function resetPage(){
+    localStorage.removeItem("copingMechanisms");
+    data.setCopingMechanismsArray([]);
+    data.loadCopingMechanismsFromStorage();
+    loadCopingMechanismsToDom();
+    clearAllTextAreas();
+    disableInputs();
 }
 
